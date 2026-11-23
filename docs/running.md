@@ -1,5 +1,10 @@
 ## Running the server
 
+With Nix flakes enabled, run `nix develop` in the checkout for the pinned Node
+and pnpm toolchain. Inside the shell, run `pnpm install --frozen-lockfile` and
+`pnpm start`. To run this checkout against another project, use
+`pnpm start /path/to/project`. No global Node or pnpm installation is needed.
+
 - `pnpm install`, then `pnpm start` runs the supervisor on Node 26. It owns the public TCP port and single-instance lock, prints the URL and opens it as a Chrome app window (`http://ultimate.localhost:<port>`, a tab without a Chrome-family browser; on macOS the installed Chrome app of that origin, found by its `CrAppModeShortcutURL` in `~/Applications/Chrome Apps.localized`, when there is one); `--no-open` or `ULTIMATE_NO_OPEN=1` disables opening.
 - Run `pnpm add -g "$PWD"` once in the clone, then `cd ~/Projects/app && ultimate`. `ultimate [dir] [--port N] [--no-open]` starts in that project, or opens a window of it when it already runs; `pnpm start` in the clone uses the clone as the project.
 - Project config belongs in `<project>/.ultimate/`: extensions, agents, skills, and optional `settings.json` (JSON object; `defaultSurface` selects the preferred surface). Discovery is built-in, user `~/.ultimate/`, then project config; later names win. User config is independent of `ULTIMATE_HOME`.
